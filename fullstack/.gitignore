@@ -1,11 +1,11 @@
-        node_modules/
+# Dependencias
+node_modules/
+
+# Compilación
 dist/
-build/
-coverage/
-.env
-.env.*
-.vscode/
-*.log
-.DS_Store
-Thumbs.db
-*.tsbuildinfo
+
+# CSS generado automáticamente
+**/src/public/css/style.css
+
+# Carpeta de entregas
+Entregas/
