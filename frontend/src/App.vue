@@ -27,6 +27,13 @@ import { RouterLink, RouterView } from 'vue-router';
               <span>About</span>
             </RouterLink>
             <RouterLink
+              to="/books"
+              class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-200"
+            >
+              <i class="fas fa-book mr-3"></i>
+              <span>Books</span>
+            </RouterLink>
+            <RouterLink
               to="/contact"
               class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-200"
             >
