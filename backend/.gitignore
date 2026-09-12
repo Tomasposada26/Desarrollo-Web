@@ -1,0 +1,12 @@
+# Dependencias
+node_modules/
+
+# Compilación
+dist/
+*.tsbuildinfo
+
+# Base de datos local
+database.sqlite
+
+# Logs
+*.log
