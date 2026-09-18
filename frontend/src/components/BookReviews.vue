@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { ReviewService } from '@/services/ReviewService.js';
+import type { ReviewInterface } from '@/interfaces/ReviewInterface.js';
 
 const props = defineProps<{
   bookId: number;
 }>();
 
-const reviews = computed(() => ReviewService.getReviewsByBookId(props.bookId));
+const reviews = ref<ReviewInterface[]>([]);
 
 const form = ref({
   rating: 5,
@@ -16,10 +17,10 @@ const form = ref({
 
 const isSubmitting = ref(false);
 
-function submitReview() {
+async function submitReview() {
   if (!form.value.comment.trim()) return;
   isSubmitting.value = true;
-  ReviewService.createReview({
+  await ReviewService.createReview({
     bookId: props.bookId,
     rating: Math.min(5, Math.max(1, form.value.rating)),
     comment: form.value.comment.trim(),
@@ -27,6 +28,7 @@ function submitReview() {
   });
   form.value = { rating: 5, comment: '', author: '' };
   isSubmitting.value = false;
+  getReviews();
 }
 
 function formatDate(iso?: string): string {
@@ -37,6 +39,14 @@ function formatDate(iso?: string): string {
     day: 'numeric',
   });
 }
+
+async function getReviews() {
+  reviews.value = await ReviewService.getReviewsByBookId(props.bookId);
+}
+
+onMounted(() => {
+  getReviews();
+});
 </script>
 
 <template>
